@@ -31,6 +31,7 @@ class Sprite {
     if (this.position.y + this.height + this.velocity.y >= canvas.height - 66) {
       this.velocity.y = 0;
       this.position.y = 360;
+      this.onGround = "true";
     } else {
       this.velocity.y += gravity;
     }
