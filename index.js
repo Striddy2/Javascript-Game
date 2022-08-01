@@ -5,16 +5,32 @@ const canvas = document.querySelector("canvas");
 const context = canvas.getContext("2d");
 
 //Sets the size of the 2d workspace / canvas.
-canvas.width = 1024;
-canvas.height = 576;
+canvas.width = 1900;
+canvas.height = 895;
 
 //Fills the created canvas with a rectangle.
 context.fillRect(0, 0, canvas.width, canvas.height);
-
 const gravity = 0.2;
 
+// Sets background elements
+const background = new backgroundElements ({
+  position: {
+    x: 0,
+    y: 0,
+  },
+  imageSrc: './resources/backgroundTest.png'
+});
+
+const foreground = new backgroundElements ({
+  position: {
+    x: 0,
+    y: 745,
+  },
+  imageSrc: './resources/frontGrass.png'
+});
+
 // Creates a new sprite named "player". This will be the main sprite used by the user.
-const player = new Sprite({
+const player = new Fighter({
   position: {
     x: 0,
     y: 0,
@@ -33,7 +49,7 @@ const enemy = new Sprite({
   },
   velocity: {
     x: 0,
-    y: 10,
+    y: 0,
   },
 });
 
@@ -88,9 +104,12 @@ function animate() {
   window.requestAnimationFrame(animate);
   context.fillStyle = "black";
   context.fillRect(0, 0, canvas.width, canvas.height);
+  background.update();
   player.update();
-  enemy.update();
-  platform.drawEntity();
+  foreground.update();
+  //enemy.update();
+  // platform.drawEntity();
+ 
 
   if (keys.a.pressed && player.lastKey === "a") {
     player.velocity.x = -5;
