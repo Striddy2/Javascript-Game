@@ -57,8 +57,11 @@ window.addEventListener("keydown", (event) => {
       player.lastKey = "a";
       break;
     case "w":
+      if (player.onGround == "true") {
+        player.velocity.y = -10;
+      }
       player.onGround = "false";
-      player.velocity.y = -10;
+
       console.log(player.velocity.y);
       console.log(player.onGround);
       break;
