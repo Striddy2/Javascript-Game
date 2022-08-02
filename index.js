@@ -205,7 +205,7 @@ function animate() {
   //platform.drawEntity();
   //enemy.update();
   scenes[0].drawScene();
-  charAnimation()
+  charAnimation();
 }
 
 animate();
