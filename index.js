@@ -13,20 +13,20 @@ context.fillRect(0, 0, canvas.width, canvas.height);
 const gravity = 0.2;
 
 // Sets background elements
-const background = new Sprite ({
+const background = new Sprite({
   position: {
     x: 0,
     y: 0,
   },
-  imageSrc: './resources/backgroundTest.png'
+  imageSrc: "./resources/backgroundTest.png",
 });
 
-const foreground = new Sprite ({
+const foreground = new Sprite({
   position: {
     x: 0,
     y: 745,
   },
-  imageSrc: './resources/frontGrass.png'
+  imageSrc: "./resources/frontGrass.png",
 });
 
 // Creates a new sprite named "player". This will be the main sprite used by the user.
@@ -39,7 +39,7 @@ const player = new Fighter({
     x: 0,
     y: 10,
   },
-  imageSrc: 'resources/120x80_PNGSheets/_Idle.png',
+  imageSrc: "resources/120x80_PNGSheets/_Idle.png",
   framesMax: 10,
   scale: 4,
   offset: {
@@ -48,38 +48,38 @@ const player = new Fighter({
   },
   sprites: {
     idle: {
-      imageSrc: 'resources/120x80_PNGSheets/_Idle.png',
-      framesMax: 10
+      imageSrc: "resources/120x80_PNGSheets/_Idle.png",
+      framesMax: 10,
     },
     idleLeft: {
-      imageSrc: 'resources/120x80_PNGSheets/_IdleLeft.png',
-      framesMax: 10
+      imageSrc: "resources/120x80_PNGSheets/_IdleLeft.png",
+      framesMax: 10,
     },
     run: {
-      imageSrc: 'resources/120x80_PNGSheets/_Run.png',
-      framesMax: 10
+      imageSrc: "resources/120x80_PNGSheets/_Run.png",
+      framesMax: 10,
     },
     runLeft: {
-      imageSrc: 'resources/120x80_PNGSheets/_RunLeft.png',
-      framesMax: 10
+      imageSrc: "resources/120x80_PNGSheets/_RunLeft.png",
+      framesMax: 10,
     },
     jump: {
-      imageSrc: 'resources/120x80_PNGSheets/_Jump.png',
-      framesMax: 3
+      imageSrc: "resources/120x80_PNGSheets/_Jump.png",
+      framesMax: 3,
     },
     jumpLeft: {
-      imageSrc: 'resources/120x80_PNGSheets/_JumpLeft.png',
-      framesMax: 3
+      imageSrc: "resources/120x80_PNGSheets/_JumpLeft.png",
+      framesMax: 3,
     },
     fall: {
-      imageSrc: 'resources/120x80_PNGSheets/_Fall.png',
-      framesMax: 3
+      imageSrc: "resources/120x80_PNGSheets/_Fall.png",
+      framesMax: 3,
     },
     fallLeft: {
-      imageSrc: 'resources/120x80_PNGSheets/_FallLeft.png',
-      framesMax: 3
-    }
-  }
+      imageSrc: "resources/120x80_PNGSheets/_FallLeft.png",
+      framesMax: 3,
+    },
+  },
 });
 
 // ***WILL NEED TO BE IMPLEMENTED***
@@ -133,7 +133,6 @@ window.addEventListener("keyup", (event) => {
     case "a":
       keys.a.pressed = false;
       break;
-    
   }
 });
 
@@ -172,41 +171,38 @@ function animate() {
   player.update();
   foreground.update();
   //enemy.update();
-  // platform.drawEntity();
-  enemy.update();
+  //platform.drawEntity();
+  //enemy.update();
   scenes[0].drawScene();
 
   if (keys.a.pressed && player.lastKey === "a") {
     player.velocity.x = -5;
-    player.switchSprite('runLeft')
+    player.switchSprite("runLeft");
   } else if (keys.d.pressed && player.lastKey === "d") {
     player.velocity.x = 5;
-    player.switchSprite('run')
+    player.switchSprite("run");
   } else {
     player.velocity.x = 0;
     if (player.lastKey === "a") {
-      player.switchSprite('idleLeft')
+      player.switchSprite("idleLeft");
     } else if (player.lastKey === "d") {
-      player.switchSprite('idle')
+      player.switchSprite("idle");
     }
   }
 
   if (player.velocity.y < 0) {
     if (player.lastKey === "a") {
-      player.switchSprite('jumpLeft')
+      player.switchSprite("jumpLeft");
     } else if (player.lastKey === "d") {
-      player.switchSprite('jump')
+      player.switchSprite("jump");
     }
   } else if (player.velocity.y > 0) {
     if (player.lastKey === "a") {
-      player.switchSprite('fallLeft')
+      player.switchSprite("fallLeft");
     } else if (player.lastKey === "d") {
-      player.switchSprite('fall')
+      player.switchSprite("fall");
     }
   }
-  
-  
-
 }
 
 animate();
