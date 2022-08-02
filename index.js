@@ -167,6 +167,13 @@ window.addEventListener("keyup", (event) => {
   }
 });
 
+let borders = [
+  { x: 450, y: 590, width: 500, height: 100 },
+  { x: 66, y: 65, width: 200, height: 200 },
+];
+context.fillStyle = "blue";
+context.fillRect(450, 350, 500, 300);
+
 const scenes = [
   new Scene(1, [
     [{ x: 550, y: -25 }, "./resources/platform.png"],
@@ -194,6 +201,47 @@ function checkIntersection(object1, object2) {
   }
 }
 
+function collision(player) {
+  let horizontalRect = {
+    x: player.position.x + player.velocity.x,
+    y: player.position.y,
+    width: player.width,
+    height: player.height,
+  };
+
+  let verticalRect = {
+    x: player.position.x,
+    y: player.position.y + player.velocity.y,
+    width: player.width,
+    height: player.height,
+  };
+
+  for (let i = 0; i < borders.length; i++) {
+    let borderRect = {
+      x: borders[i].x,
+      y: borders[i].y,
+      width: borders[i].width,
+      height: borders[i].height,
+    };
+    if (checkIntersection(horizontalRect, borderRect)) {
+      while (checkIntersection(horizontalRect, borderRect)) {
+        horizontalRect.x -= Math.sign(player.velocity.x);
+      }
+      player.position.x = horizontalRect.x;
+      player.velocity.x = 0;
+    }
+    if (checkIntersection(verticalRect, borderRect)) {
+      while (checkIntersection(verticalRect, borderRect)) {
+        verticalRect.y -= Math.sign(player.velocity.y);
+      }
+      //player.position.y = verticalRect.y;
+      player.velocity.y = 0;
+      player.onGround = "true";
+    }
+  }
+  console.log(player.velocity.y);
+}
+
 function animate() {
   window.requestAnimationFrame(animate);
   context.fillStyle = "black";
@@ -205,9 +253,12 @@ function animate() {
   //platform.drawEntity();
   //enemy.update();
   scenes[0].drawScene();
+  collision(player);
   charAnimation();
+  //context.fillStyle = "blue";
+  //context.fillRect(400, 500, 500, 100);
 }
 
 animate();
 
-console.log(player.onGround);
+console.log(player.onawddGround);
