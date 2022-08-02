@@ -41,7 +41,7 @@ const player = new Fighter({
   },
   imageSrc: "resources/120x80_PNGSheets/_Idle.png",
   framesMax: 10,
-  scale: 4,
+  scale: 3,
   offset: {
     x: 200,
     y: 200,
@@ -81,6 +81,37 @@ const player = new Fighter({
     },
   },
 });
+
+// Sets Character Animations
+function charAnimation() {
+  if (keys.a.pressed && player.lastKey === "a") {
+    player.velocity.x = -5;
+    player.switchSprite("runLeft");
+  } else if (keys.d.pressed && player.lastKey === "d") {
+    player.velocity.x = 5;
+    player.switchSprite("run");
+  } else {
+    player.velocity.x = 0;
+    if (player.lastKey === "a") {
+      player.switchSprite("idleLeft");
+    } else if (player.lastKey === "d") {
+      player.switchSprite("idle");
+    }
+  }
+  if (player.velocity.y < 0) {
+    if (player.lastKey === "a") {
+      player.switchSprite("jumpLeft");
+    } else if (player.lastKey === "d") {
+      player.switchSprite("jump");
+    }
+  } else if (player.velocity.y > 0) {
+    if (player.lastKey === "a") {
+      player.switchSprite("fallLeft");
+    } else if (player.lastKey === "d") {
+      player.switchSprite("fall");
+    }
+  }
+}
 
 // ***WILL NEED TO BE IMPLEMENTED***
 const enemy = new Sprite({
@@ -174,35 +205,7 @@ function animate() {
   //platform.drawEntity();
   //enemy.update();
   scenes[0].drawScene();
-
-  if (keys.a.pressed && player.lastKey === "a") {
-    player.velocity.x = -5;
-    player.switchSprite("runLeft");
-  } else if (keys.d.pressed && player.lastKey === "d") {
-    player.velocity.x = 5;
-    player.switchSprite("run");
-  } else {
-    player.velocity.x = 0;
-    if (player.lastKey === "a") {
-      player.switchSprite("idleLeft");
-    } else if (player.lastKey === "d") {
-      player.switchSprite("idle");
-    }
-  }
-
-  if (player.velocity.y < 0) {
-    if (player.lastKey === "a") {
-      player.switchSprite("jumpLeft");
-    } else if (player.lastKey === "d") {
-      player.switchSprite("jump");
-    }
-  } else if (player.velocity.y > 0) {
-    if (player.lastKey === "a") {
-      player.switchSprite("fallLeft");
-    } else if (player.lastKey === "d") {
-      player.switchSprite("fall");
-    }
-  }
+  charAnimation()
 }
 
 animate();
