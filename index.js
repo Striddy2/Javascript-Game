@@ -61,9 +61,6 @@ window.addEventListener("keydown", (event) => {
         player.velocity.y = -10;
       }
       player.onGround = "false";
-
-      console.log(player.velocity.y);
-      console.log(player.onGround);
       break;
     case " ":
       player.attack();
@@ -82,7 +79,32 @@ window.addEventListener("keyup", (event) => {
   }
 });
 
-const platform = new Scene(1, { x: 250, y: 100 }, "./resources/platform.png");
+const scenes = [
+  new Scene(1, [
+    [{ x: 550, y: -25 }, "./resources/platform.png"],
+    [{ x: 100, y: 0 }, "./resources/platform.png"],
+    [{ x: 450, y: 350 }, "./resources/platform.png"],
+  ]),
+  new Scene(2, [
+    [{ x: 250, y: 100 }, "./resources/platform.png"],
+    [{ x: 150, y: 200 }, "./resources/platform.png"],
+    [{ x: 50, y: 300 }, "./resources/platform.png"],
+  ]),
+];
+
+function checkIntersection(object1, object2) {
+  if (object1.x >= object2.x + object2.width) {
+    return false;
+  } else if (object1.x + object1.width <= object2.x) {
+    return false;
+  } else if (object1.y >= object2.y + object2.height) {
+    return false;
+  } else if (object1.y + object1.height <= object2.y) {
+    return false;
+  } else {
+    return true;
+  }
+}
 
 function animate() {
   window.requestAnimationFrame(animate);
@@ -90,7 +112,7 @@ function animate() {
   context.fillRect(0, 0, canvas.width, canvas.height);
   player.update();
   enemy.update();
-  platform.drawEntity();
+  scenes[0].drawScene();
 
   if (keys.a.pressed && player.lastKey === "a") {
     player.velocity.x = -5;

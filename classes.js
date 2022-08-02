@@ -39,14 +39,18 @@ class Sprite {
 }
 
 class Scene {
-  constructor(numberOfScene, position, imageSrc) {
+  constructor(numberOfScene, objects) {
     this.numberOfScene = numberOfScene;
-    this.position = position;
+    this.objects = objects;
     this.image = new Image();
-    this.image.src = imageSrc;
   }
 
-  drawEntity() {
-    context.drawImage(this.image, this.position.x, this.position.y);
+  drawScene() {
+    let object;
+    for (let i = 0; i < this.objects.length; i++) {
+      object = this.objects[i];
+      this.image.src = object[1];
+      context.drawImage(this.image, object[0].x, object[0].y);
+    }
   }
 }
