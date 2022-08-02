@@ -1,92 +1,166 @@
 class Sprite {
-  constructor({ position, velocity,}) {
+  constructor({ position, imageSrc, scale = 1, framesMax = 1, offset = {x:0, y:0}}) {
     this.position = position;
-    this.velocity = velocity;
+    this.width = 50;
     this.height = 50;
-    this.onGround = "false";
     this.image = new Image();
-    this.image.src = './resources/120x80_PNGSheets/_Idle.png';
+    this.image.src = imageSrc;
+    this.scale = scale
+    this.framesMax = framesMax;
+    this.framesCurrent = 0;
+    this.framesElapsed = 0;
+    this.framesHold = 10;
+    this.offset = offset;
 
   }
 
   draw() {
-    // context.fillStyle = "red";
-    // context.fillRect(this.position.x, this.position.y, 50, this.height);
+    context.drawImage(
+      this.image,
+      this.framesCurrent * (this.image.width / this.framesMax),
+      0,
+      this.image.width / this.framesMax,
+      this.image.height,
+      this.position.x - this.offset.x,
+      this.position.y - this.offset.y,
+      (this.image.width / this.framesMax) * this.scale,
+      this.image.height * this.scale,
+    )
+  }
 
-    context.drawImage(this.image, this.position.x, this.position.y);
+  animateFrames() {
+    this.framesElapsed++
+
+    if(this.framesElapsed % this.framesHold === 0) {
+      if (this.framesCurrent < this.framesMax - 1) {
+      this.framesCurrent++
+      } else {
+        this.framesCurrent = 0
+      }
+    }
   }
 
   update() {
     this.draw();
-    // if (this.position.y < 425) {
-    //     //velocity changes a sprite position
-    //     this.position.y += this.velocity.y
-    //     this.velocity.y += gravity
+    this.animateFrames()
+  }
+}
 
-    // } else if (this.onGround == "true"){
-    //     this.position.y += this.velocity.y
+class Fighter extends Sprite {
+  constructor({ 
+    position, 
+    velocity, 
+    imageSrc, 
+    scale = 1, 
+    framesMax = 1, 
+    offset = {x:0, y:0},
+    sprites,
+  }) {
+    
+      super({
+      position,
+      imageSrc,
+      scale,
+      framesMax,
+      offset
+    })
+    
+    this.velocity = velocity;
+    this.height = 50;
+    this.onGround = "false";
+    this.framesCurrent = 0;
+    this.framesElapsed = 0;
+    this.framesHold = 10;
+    this.sprites = sprites
 
-    // } else if (this.position.y >= 425){
-    //     this.onGround = "true"
-    //     this.velocity.y = 0
-    // }
+    for (const sprite in this.sprites) {
+      sprites[sprite].image = new Image()
+      sprites[sprite].image.src = sprites[sprite].imageSrc
+    }
+  }
+
+    update() {
+    this.draw();
+    this.animateFrames();
+
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
 
-    if (this.position.y + this.height + this.velocity.y >= canvas.height - 70) {
+    if (this.position.y + this.height + this.velocity.y >= canvas.height - 145) {
       this.velocity.y = 0;
-      this.position.y = 775;
+      this.position.y = 700;
       this.onGround = "true";
     } else {
       this.velocity.y += gravity;
     }
   }
-}
 
-class backgroundElements {
-  constructor({ position, imageSrc}) {
-    this.position = position;
-    this.image = new Image()
-    this.image.src = imageSrc
+  switchSprite(sprite) {
+    switch (sprite) {
+      case 'idle':
+        if (this.image !== this.sprites.idle.image) {
+        this.image = this.sprites.idle.image
+        this.framesMax = this.sprites.idle.framesMax
+        this.framesCurrent = 0
+        }
+       break
 
-  }
+       case 'idleLeft':
+        if (this.image !== this.sprites.idleLeft.image) {
+        this.image = this.sprites.idleLeft.image
+        this.framesMax = this.sprites.idleLeft.framesMax
+        this.framesCurrent = 0
+        }
+        
+       break
 
-  draw() {
-    context.drawImage(this.image, this.position.x, this.position.y)
-  }
+      case 'run':
+        if (this.image !== this.sprites.run.image) {
+        this.image = this.sprites.run.image
+        this.framesMax = this.sprites.run.framesMax
+        this.framesCurrent = 0
+        }
+        break
 
-  update() {
-    this.draw();
-  }
-}
+        case 'runLeft':
+          if (this.image !== this.sprites.runLeft.image) {
+          this.image = this.sprites.runLeft.image
+          this.framesMax = this.sprites.runLeft.framesMax
+          this.framesCurrent = 0
+          }
+          break
 
-class Fighter {
-  constructor({ position, velocity,}) {
-    this.position = position;
-    this.velocity = velocity;
-    this.height = 50;
-    this.onGround = "false";
-    this.image = new Image();
-    this.image.src = './resources/120x80_PNGSheets/_Idle.png';
+      case 'jump':
+        if (this.image !== this.sprites.jump.image) {
+          this.image = this.sprites.jump.image
+          this.framesMax = this.sprites.jump.framesMax
+          this.framesCurrent = 0
+      }
+        break
 
-  }
+      case 'jumpLeft':
+        if (this.image !== this.sprites.jumpLeft.image) {
+          this.image = this.sprites.jumpLeft.image
+          this.framesMax = this.sprites.jumpLeft.framesMax
+          this.framesCurrent = 0
+      }
+        break
 
-  draw() {
-    context.drawImage(this.image, this.position.x, this.position.y);
-  }
+      case 'fall':
+        if (this.image !== this.sprites.fall.image) {
+          this.image = this.sprites.fall.image
+          this.framesMax = this.sprites.fall.framesMax
+          this.framesCurrent = 0
+      }
+        break  
 
-  update() {
-    this.draw();
-
-    this.position.x += this.velocity.x;
-    this.position.y += this.velocity.y;
-
-    if (this.position.y + this.height + this.velocity.y >= canvas.height - 95) {
-      this.velocity.y = 0;
-      this.position.y = 750;
-      this.onGround = "true";
-    } else {
-      this.velocity.y += gravity;
+      case 'fallLeft':
+        if (this.image !== this.sprites.fallLeft.image) {
+          this.image = this.sprites.fallLeft.image
+          this.framesMax = this.sprites.fallLeft.framesMax
+          this.framesCurrent = 0
+      }
+        break    
     }
   }
 }
@@ -103,3 +177,29 @@ class Scene {
     context.drawImage(this.image, this.position.x, this.position.y);
   }
 }
+
+
+// Below is old code that Ian wrote and might need
+
+   // if (this.position.y < 425) {
+    //     //velocity changes a sprite position
+    //     this.position.y += this.velocity.y
+    //     this.velocity.y += gravity
+
+    // } else if (this.onGround == "true"){
+    //     this.position.y += this.velocity.y
+
+    // } else if (this.position.y >= 425){
+    //     this.onGround = "true"
+    //     this.velocity.y = 0
+    // }
+    // this.position.x += this.velocity.x;
+    // this.position.y += this.velocity.y;
+
+    // if (this.position.y + this.height + this.velocity.y >= canvas.height - 70) {
+    //   this.velocity.y = 0;
+    //   this.position.y = 775;
+    //   this.onGround = "true";
+    // } else {
+    //   this.velocity.y += gravity;
+    // }

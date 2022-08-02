@@ -13,7 +13,7 @@ context.fillRect(0, 0, canvas.width, canvas.height);
 const gravity = 0.2;
 
 // Sets background elements
-const background = new backgroundElements ({
+const background = new Sprite ({
   position: {
     x: 0,
     y: 0,
@@ -21,7 +21,7 @@ const background = new backgroundElements ({
   imageSrc: './resources/backgroundTest.png'
 });
 
-const foreground = new backgroundElements ({
+const foreground = new Sprite ({
   position: {
     x: 0,
     y: 745,
@@ -39,6 +39,47 @@ const player = new Fighter({
     x: 0,
     y: 10,
   },
+  imageSrc: 'resources/120x80_PNGSheets/_Idle.png',
+  framesMax: 10,
+  scale: 4,
+  offset: {
+    x: 200,
+    y: 200,
+  },
+  sprites: {
+    idle: {
+      imageSrc: 'resources/120x80_PNGSheets/_Idle.png',
+      framesMax: 10
+    },
+    idleLeft: {
+      imageSrc: 'resources/120x80_PNGSheets/_IdleLeft.png',
+      framesMax: 10
+    },
+    run: {
+      imageSrc: 'resources/120x80_PNGSheets/_Run.png',
+      framesMax: 10
+    },
+    runLeft: {
+      imageSrc: 'resources/120x80_PNGSheets/_RunLeft.png',
+      framesMax: 10
+    },
+    jump: {
+      imageSrc: 'resources/120x80_PNGSheets/_Jump.png',
+      framesMax: 3
+    },
+    jumpLeft: {
+      imageSrc: 'resources/120x80_PNGSheets/_JumpLeft.png',
+      framesMax: 3
+    },
+    fall: {
+      imageSrc: 'resources/120x80_PNGSheets/_Fall.png',
+      framesMax: 3
+    },
+    fallLeft: {
+      imageSrc: 'resources/120x80_PNGSheets/_FallLeft.png',
+      framesMax: 3
+    }
+  }
 });
 
 // ***WILL NEED TO BE IMPLEMENTED***
@@ -95,6 +136,7 @@ window.addEventListener("keyup", (event) => {
     case "a":
       keys.a.pressed = false;
       break;
+    
   }
 });
 
@@ -113,14 +155,35 @@ function animate() {
 
   if (keys.a.pressed && player.lastKey === "a") {
     player.velocity.x = -5;
-    //player.switchSprite('run')
+    player.switchSprite('runLeft')
   } else if (keys.d.pressed && player.lastKey === "d") {
     player.velocity.x = 5;
-    //player.switchSprite('run')
+    player.switchSprite('run')
   } else {
     player.velocity.x = 0;
-    //player.switchSprite('idle')
+    if (player.lastKey === "a") {
+      player.switchSprite('idleLeft')
+    } else if (player.lastKey === "d") {
+      player.switchSprite('idle')
+    }
   }
+
+  if (player.velocity.y < 0) {
+    if (player.lastKey === "a") {
+      player.switchSprite('jumpLeft')
+    } else if (player.lastKey === "d") {
+      player.switchSprite('jump')
+    }
+  } else if (player.velocity.y > 0) {
+    if (player.lastKey === "a") {
+      player.switchSprite('fallLeft')
+    } else if (player.lastKey === "d") {
+      player.switchSprite('fall')
+    }
+  }
+  
+  
+
 }
 
 animate();
