@@ -29,6 +29,16 @@ const foreground = new Sprite({
   imageSrc: "./resources/frontGrass.png",
 });
 
+const bonefire = new Sprite({
+  position: {
+    x: 840,
+    y: 662,
+  },
+  imageSrc: "./resources/bonfire.png",
+  scale: 2,
+  framesMax: 20,
+})
+
 // Creates a new sprite named "player". This will be the main sprite used by the user.
 const player = new Fighter({
   position: {
@@ -43,8 +53,8 @@ const player = new Fighter({
   framesMax: 10,
   scale: 3,
   offset: {
-    x: 200,
-    y: 200,
+    x: 120,
+    y: 80,
   },
   sprites: {
     idle: {
@@ -199,12 +209,13 @@ function animate() {
   context.fillStyle = "black";
   context.fillRect(0, 0, canvas.width, canvas.height);
   background.update();
+  bonefire.update();
   player.update();
   foreground.update();
   //enemy.update();
   //platform.drawEntity();
   //enemy.update();
-  scenes[0].drawScene();
+  // scenes[0].drawScene();
   charAnimation()
 }
 
