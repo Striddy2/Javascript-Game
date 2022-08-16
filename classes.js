@@ -49,6 +49,16 @@ class Sprite {
     this.draw();
     this.animateFrames();
   }
+
+  //DONT DELETE THIS MIGHT NEED
+  // animateObject() {
+  //   let object;
+  //   for (let i = 0; i < this.objects.length; i++) {
+  //     object = this.objects[i];
+  //     this.image.src = object[1];
+  //     context.drawImage(this.image, object[0].x, object[0].y);
+  //   }
+  // }
 }
 
 class Fighter extends Sprite {
@@ -96,12 +106,8 @@ class Fighter extends Sprite {
 
     if (
       this.position.y + this.height + this.velocity.y >=
-      canvas.height - 145
+      !canvas.height - 145
     ) {
-      this.velocity.y = 0;
-      this.position.y = 700;
-      this.onGround = "true";
-    } else {
       this.velocity.y += gravity;
     }
   }
