@@ -298,7 +298,7 @@ function updateBorders() {
     case 0:
       borders = [
         //{ x: 450, y: 500, width: 200, height: 100 },
-        //{ x: -115, y: 0, width: 50, height: 895 },
+        { x: -115, y: 0, width: 50, height: 895 },
         { x: -75, y: 750, width: 1950, height: 10 },
       ];
       platformBorders = [
@@ -318,9 +318,11 @@ function updateBorders() {
 
 const objects = [
   new Scene(1, [
-    [{ x: 550, y: -25 }, "./resources/platform.png"],
-    [{ x: 100, y: 0 }, "./resources/platform.png"],
-    [{ x: 450, y: 350 }, "./resources/platform.png"],
+    // [{ x: 550, y: -25 }, "./resources/platform.png"],
+    [{ x: 450, y: 350 }, "./resources/spacebar.png"],
+    [{ x: 360, y: 500 }, "./resources/wasd.png"],
+    // [{ x: 100, y: 0 }, "./resources/platform.png"],
+    // [{ x: 450, y: 350 }, "./resources/platform.png"],
   ]),
   new Scene(2, [
     [{ x: 250, y: 100 }, "./resources/platform.png"],
@@ -352,9 +354,9 @@ function showBorders(currentScene) {
     case 0:
       //floor
       context.fillStyle = "blue";
-      context.fillRect(0, 825, 1900, 40);
-      //context.fillRect(525, 570, 200, 40);
-      //context.fillRect(775, 570, 200, 40);
+      context.fillRect(0, 820, 1950, 40);
+      context.fillRect(-40, 0, 50, 895);
+      // context.fillRect(775, 570, 200, 40);
       break;
   }
 }
