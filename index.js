@@ -238,13 +238,14 @@ function updateScene() {
 }
 
 function checkForDeath() {
-  if (player.position.y > 700) {
+  if (player.position.y > 800) {
     isDead();
   }
 }
 
 function isDead() {
-  currentScene = 0;
+  player.position.x = 0;
+  player.position.y = 680;
 }
 
 // Sets background
@@ -373,6 +374,7 @@ function animate() {
   horizontalCollision();
   charAnimation();
   updateScene();
+  checkForDeath();
   showBorders(currentScene);
 }
 
