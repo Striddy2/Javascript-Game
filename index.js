@@ -227,7 +227,7 @@ function verticalCollision() {
   }
 }
 
-let currentScene = 0;
+let currentScene = 1;
 
 function updateScene() {
   if (player.position.x > 1900) {
@@ -286,7 +286,20 @@ const background = [
 
 const foregroundObjects = [
   new Scene(1, [[{ x: 0, y: 745 }, "./resources/frontGrass.png"]]),
-  new Scene(2, [[{ x: 0, y: 745 }, "./resources/frontGrass.png"]]),
+  new Scene(2, [
+    [{ x: 1500, y: 340 }, "./resources/small tree.png"],
+    [{ x: 400, y: 770 }, "./resources/small tree.png"],
+    [{ x: 1200, y: 540 }, "./resources/small tree 2.png"],
+    [{ x: 200, y: 500 }, "./resources/small tree 2.png"],
+    [{ x: 0, y: 745 }, "./resources/frontGrass.png"],
+  ]),
+  new Scene(3, [
+    [{ x: 1500, y: 340 }, "./resources/small tree.png"],
+    [{ x: 400, y: 770 }, "./resources/small tree.png"],
+    [{ x: 1200, y: 540 }, "./resources/small tree 2.png"],
+    [{ x: 200, y: 500 }, "./resources/small tree 2.png"],
+    [{ x: 0, y: 745 }, "./resources/frontGrass.png"],
+  ]),
 ];
 
 let borders = [];
@@ -307,29 +320,64 @@ function updateBorders() {
       break;
     case 1:
       borders = [
-        { x: 450, y: 500, width: 200, height: 100 },
+        // { x: 450, y: 500, width: 200, height: 100 },
         { x: -115, y: 0, width: 50, height: 895 },
         { x: -75, y: 750, width: 1950, height: 10 },
+        { x: 816, y: 525, width: 150, height: 240 },
       ];
-      platformBorders = [{ x: 700, y: 500, width: 200, height: 100 }];
+      // platformBorders = [{ x: 700, y: 500, width: 200, height: 100 }];
+      break;
+    case 2:
+      borders = [
+        // { x: 450, y: 500, width: 200, height: 100 },
+        { x: -115, y: 0, width: 50, height: 895 },
+        // { x: -75, y: 750, width: 1950, height: 10 },
+        { x: 816, y: 525, width: 150, height: 240 },
+      ];
+      // platformBorders = [{ x: 700, y: 500, width: 200, height: 100 }];
       break;
   }
 }
 
-const objects = [
-  new Scene(1, [
-    // [{ x: 550, y: -25 }, "./resources/platform.png"],
-    [{ x: 450, y: 350 }, "./resources/spacebar.png"],
-    [{ x: 360, y: 500 }, "./resources/wasd.png"],
-    // [{ x: 100, y: 0 }, "./resources/platform.png"],
-    // [{ x: 450, y: 350 }, "./resources/platform.png"],
-  ]),
+const sceneObjects = [
+  new Scene(1, [[{ x: 370, y: 500 }, "./controls/wasd.png"]]),
   new Scene(2, [
-    [{ x: 250, y: 100 }, "./resources/platform.png"],
-    [{ x: 150, y: 200 }, "./resources/platform.png"],
-    [{ x: 50, y: 300 }, "./resources/platform.png"],
+    [{ x: 889, y: 720 }, "./resources/towerFiller.png"],
+    [{ x: 889, y: 770 }, "./resources/towerFiller.png"],
+    [{ x: 870, y: 595 }, "./resources/tower.png"],
+    [{ x: 600, y: 320 }, "./resources/small tree.png"],
+    [{ x: 889, y: 770 }, "./resources/small tree.png"],
+  ]),
+  new Scene(3, [
+    [{ x: 889, y: 720 }, "./resources/towerFiller.png"],
+    [{ x: 889, y: 770 }, "./resources/towerFiller.png"],
+    [{ x: 870, y: 595 }, "./resources/tower.png"],
+    [{ x: 600, y: 320 }, "./resources/small tree.png"],
+    [{ x: 889, y: 770 }, "./resources/small tree.png"],
   ]),
 ];
+
+context.fillStyle = "blue";
+function showBorders(currentScene) {
+  switch (currentScene) {
+    case 0:
+      //floor
+      context.fillStyle = "blue";
+      context.fillRect(0, 820, 1950, 40);
+      context.fillRect(-40, 0, 50, 895);
+      break;
+    case 1:
+      context.fillRect(0, 820, 1950, 40);
+      context.fillRect(-40, 0, 50, 895);
+      context.fillRect(891, 595, 150, 240);
+      break;
+    case 2:
+      context.fillRect(0, 820, 1950, 40);
+      context.fillRect(-40, 0, 50, 895);
+      context.fillRect(891, 595, 150, 240);
+      break;
+  }
+}
 
 //TO BE IMPLEMENTED!!!!!!!!!!!!
 // const animatedObjects = [
@@ -348,24 +396,37 @@ const objects = [
 //   ]),
 // ];
 
-context.fillStyle = "blue";
-function showBorders(currentScene) {
-  switch (currentScene) {
-    case 0:
-      //floor
-      context.fillStyle = "blue";
-      context.fillRect(0, 820, 1950, 40);
-      context.fillRect(-40, 0, 50, 895);
-      // context.fillRect(775, 570, 200, 40);
-      break;
-  }
-}
+// function createScene(currentScene) {
+//   switch (currentScene) {
+//     case 0:
+//       instructions[currentScene].drawScene();
+//       break;
+//     case 1:
+//       towerPlatforms[currentScene].drawScene();
+//       towerFiller[currentScene].drawScene();
+//       break;
+//   }
+// }
+
+// function createForegroundScene(currentScene) {
+//   switch (currentScene) {
+//     case 0:
+//       grass[currentScene].drawScene();
+//       break;
+//     case 1:
+//       smallTree[currentScene].drawScene();
+//       smallTree2[currentScene].drawScene();
+//       grass[currentScene].drawScene();
+//       break;
+//   }
+// }
 
 function animate() {
   window.requestAnimationFrame(animate);
   updateBorders();
   background[currentScene].update();
-  objects[currentScene].drawScene();
+  // createScene(currentScene);
+  sceneObjects[currentScene].drawScene();
   //animatedObjects[0].update();
   player.update();
   foregroundObjects[currentScene].drawScene();

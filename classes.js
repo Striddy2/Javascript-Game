@@ -186,15 +186,17 @@ class Scene {
   constructor(numberOfScene, objects) {
     this.numberOfScene = numberOfScene;
     this.objects = objects;
-    this.image = new Image();
   }
 
   drawScene() {
     let object;
     for (let i = 0; i < this.objects.length; i++) {
       object = this.objects[i];
-      this.image.src = object[1];
-      context.drawImage(this.image, object[0].x, object[0].y);
+      const image = new Image();
+      image.src = object[1];
+      // this.image.src = object[1];
+      // const src = this.image.src
+      context.drawImage(image, object[0].x, object[0].y);
     }
   }
 }
