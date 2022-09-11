@@ -12,23 +12,6 @@ canvas.height = 895;
 context.fillRect(0, 0, canvas.width, canvas.height);
 const gravity = 0.2;
 
-// Sets background elements
-const background = new Sprite({
-  position: {
-    x: 0,
-    y: 0,
-  },
-  imageSrc: "./resources/backgroundTest.png",
-});
-
-const foreground = new Sprite({
-  position: {
-    x: 0,
-    y: 745,
-  },
-  imageSrc: "./resources/frontGrass.png",
-});
-
 // Creates a new sprite named "player". This will be the main sprite used by the user.
 const player = new Fighter({
   position: {
@@ -43,8 +26,8 @@ const player = new Fighter({
   framesMax: 10,
   scale: 3,
   offset: {
-    x: 200,
-    y: 200,
+    x: 80,
+    y: 120,
   },
   sprites: {
     idle: {
@@ -167,19 +150,6 @@ window.addEventListener("keyup", (event) => {
   }
 });
 
-const scenes = [
-  new Scene(1, [
-    [{ x: 550, y: -25 }, "./resources/platform.png"],
-    [{ x: 100, y: 0 }, "./resources/platform.png"],
-    [{ x: 450, y: 350 }, "./resources/platform.png"],
-  ]),
-  new Scene(2, [
-    [{ x: 250, y: 100 }, "./resources/platform.png"],
-    [{ x: 150, y: 200 }, "./resources/platform.png"],
-    [{ x: 50, y: 300 }, "./resources/platform.png"],
-  ]),
-];
-
 function checkIntersection(object1, object2) {
   if (object1.x >= object2.x + object2.width) {
     return false;
@@ -194,20 +164,281 @@ function checkIntersection(object1, object2) {
   }
 }
 
+function horizontalCollision() {
+  let horizontalRect = {
+    x: player.position.x + player.velocity.x,
+    y: player.position.y,
+    width: player.width,
+    height: player.height,
+  };
+
+  for (let i = 0; i < borders.length; i++) {
+    let borderRect = {
+      x: borders[i].x,
+      y: borders[i].y,
+      width: borders[i].width,
+      height: borders[i].height,
+    };
+    if (checkIntersection(horizontalRect, borderRect)) {
+      player.position.x = player.position.x - player.velocity.x;
+    }
+  }
+}
+
+function verticalCollision() {
+  let verticalRect = {
+    x: player.position.x,
+    y: player.position.y + player.velocity.y,
+    width: player.width,
+    height: player.height,
+  };
+
+  for (let i = 0; i < borders.length; i++) {
+    let borderRect = {
+      x: borders[i].x,
+      y: borders[i].y,
+      width: borders[i].width,
+      height: borders[i].height,
+    };
+
+    if (checkIntersection(verticalRect, borderRect)) {
+      if (player.position.y >= borderRect.y) {
+        player.position.y = player.position.y - player.velocity.y;
+      }
+      player.velocity.y = 0;
+      player.onGround = "true";
+    }
+  }
+
+  for (let i = 0; i < platformBorders.length; i++) {
+    let platformBorderRect = {
+      x: platformBorders[i].x,
+      y: platformBorders[i].y,
+      width: platformBorders[i].width,
+      height: platformBorders[i].height,
+    };
+
+    if (player.position.y <= platformBorderRect.y - 50) {
+      if (checkIntersection(verticalRect, platformBorderRect)) {
+        player.velocity.y = 0;
+        player.onGround = "true";
+      }
+    }
+  }
+}
+
+let currentScene = 1;
+
+function updateScene() {
+  if (player.position.x > 1900) {
+    player.position.x = 0;
+    player.position.y = 690;
+    currentScene++;
+  }
+}
+
+function checkForDeath() {
+  if (player.position.y > 800) {
+    isDead();
+  }
+}
+
+function isDead() {
+  player.position.x = 0;
+  player.position.y = 680;
+}
+
+// Sets background
+const background = [
+  //Scene 1 Background
+  new Sprite({
+    position: {
+      x: 0,
+      y: 0,
+    },
+    imageSrc: "./resources/backgroundTest.png",
+  }),
+  //Scene 2 Background
+  new Sprite({
+    position: {
+      x: 0,
+      y: 0,
+    },
+    imageSrc: "./resources/backgroundTest.png",
+  }),
+  //Scene 3 Background
+  new Sprite({
+    position: {
+      x: 0,
+      y: 0,
+    },
+    imageSrc: "./resources/background C complete.png",
+  }),
+  //Scene 4 Background
+  new Sprite({
+    position: {
+      x: 0,
+      y: 0,
+    },
+    imageSrc: "./resources/background C complete.png",
+  }),
+];
+
+const foregroundObjects = [
+  new Scene(1, [[{ x: 0, y: 745 }, "./resources/frontGrass.png"]]),
+  new Scene(2, [
+    [{ x: 1500, y: 340 }, "./resources/small tree.png"],
+    [{ x: 400, y: 770 }, "./resources/small tree.png"],
+    [{ x: 1200, y: 540 }, "./resources/small tree 2.png"],
+    [{ x: 200, y: 500 }, "./resources/small tree 2.png"],
+    [{ x: 0, y: 745 }, "./resources/frontGrass.png"],
+  ]),
+  new Scene(3, [
+    [{ x: 1500, y: 340 }, "./resources/small tree.png"],
+    [{ x: 400, y: 770 }, "./resources/small tree.png"],
+    [{ x: 1200, y: 540 }, "./resources/small tree 2.png"],
+    [{ x: 200, y: 500 }, "./resources/small tree 2.png"],
+    [{ x: 0, y: 745 }, "./resources/frontGrass.png"],
+  ]),
+];
+
+let borders = [];
+let platformBorders = [];
+
+//border is always x-75 y-70 height +60 compared to the actually drawn object
+function updateBorders() {
+  switch (currentScene) {
+    case 0:
+      borders = [
+        //{ x: 450, y: 500, width: 200, height: 100 },
+        { x: -115, y: 0, width: 50, height: 895 },
+        { x: -75, y: 750, width: 1950, height: 10 },
+      ];
+      platformBorders = [
+        /*{ x: 700, y: 500, width: 200, height: 100 }*/
+      ];
+      break;
+    case 1:
+      borders = [
+        // { x: 450, y: 500, width: 200, height: 100 },
+        { x: -115, y: 0, width: 50, height: 895 },
+        { x: -75, y: 750, width: 1950, height: 10 },
+        { x: 816, y: 525, width: 150, height: 240 },
+      ];
+      // platformBorders = [{ x: 700, y: 500, width: 200, height: 100 }];
+      break;
+    case 2:
+      borders = [
+        // { x: 450, y: 500, width: 200, height: 100 },
+        { x: -115, y: 0, width: 50, height: 895 },
+        // { x: -75, y: 750, width: 1950, height: 10 },
+        { x: 816, y: 525, width: 150, height: 240 },
+      ];
+      // platformBorders = [{ x: 700, y: 500, width: 200, height: 100 }];
+      break;
+  }
+}
+
+const sceneObjects = [
+  new Scene(1, [[{ x: 370, y: 500 }, "./controls/wasd.png"]]),
+  new Scene(2, [
+    [{ x: 889, y: 720 }, "./resources/towerFiller.png"],
+    [{ x: 889, y: 770 }, "./resources/towerFiller.png"],
+    [{ x: 870, y: 595 }, "./resources/tower.png"],
+    [{ x: 600, y: 320 }, "./resources/small tree.png"],
+    [{ x: 889, y: 770 }, "./resources/small tree.png"],
+  ]),
+  new Scene(3, [
+    [{ x: 889, y: 720 }, "./resources/towerFiller.png"],
+    [{ x: 889, y: 770 }, "./resources/towerFiller.png"],
+    [{ x: 870, y: 595 }, "./resources/tower.png"],
+    [{ x: 600, y: 320 }, "./resources/small tree.png"],
+    [{ x: 889, y: 770 }, "./resources/small tree.png"],
+  ]),
+];
+
+context.fillStyle = "blue";
+function showBorders(currentScene) {
+  switch (currentScene) {
+    case 0:
+      //floor
+      context.fillStyle = "blue";
+      context.fillRect(0, 820, 1950, 40);
+      context.fillRect(-40, 0, 50, 895);
+      break;
+    case 1:
+      context.fillRect(0, 820, 1950, 40);
+      context.fillRect(-40, 0, 50, 895);
+      context.fillRect(891, 595, 150, 240);
+      break;
+    case 2:
+      context.fillRect(0, 820, 1950, 40);
+      context.fillRect(-40, 0, 50, 895);
+      context.fillRect(891, 595, 150, 240);
+      break;
+  }
+}
+
+//TO BE IMPLEMENTED!!!!!!!!!!!!
+// const animatedObjects = [
+//   new Fighter(
+//     {
+//       imageSrc: "resources/120x80_PNGSheets/_Idle.png",
+//       framesMax: 10,
+//     }
+//     [{ x: 100, y: 0 }, "./resources/platform.png"],
+//     [{ x: 450, y: 350 }, "./resources/platform.png"],
+//   ),
+//   new Sprite(2, [
+//     [{ x: 250, y: 100 }, "./resources/platform.png"],
+//     [{ x: 150, y: 200 }, "./resources/platform.png"],
+//     [{ x: 50, y: 300 }, "./resources/platform.png"],
+//   ]),
+// ];
+
+// function createScene(currentScene) {
+//   switch (currentScene) {
+//     case 0:
+//       instructions[currentScene].drawScene();
+//       break;
+//     case 1:
+//       towerPlatforms[currentScene].drawScene();
+//       towerFiller[currentScene].drawScene();
+//       break;
+//   }
+// }
+
+// function createForegroundScene(currentScene) {
+//   switch (currentScene) {
+//     case 0:
+//       grass[currentScene].drawScene();
+//       break;
+//     case 1:
+//       smallTree[currentScene].drawScene();
+//       smallTree2[currentScene].drawScene();
+//       grass[currentScene].drawScene();
+//       break;
+//   }
+// }
+
 function animate() {
   window.requestAnimationFrame(animate);
-  context.fillStyle = "black";
-  context.fillRect(0, 0, canvas.width, canvas.height);
-  background.update();
+  updateBorders();
+  background[currentScene].update();
+  // createScene(currentScene);
+  sceneObjects[currentScene].drawScene();
+  //animatedObjects[0].update();
   player.update();
-  foreground.update();
+  foregroundObjects[currentScene].drawScene();
   //enemy.update();
   //platform.drawEntity();
   //enemy.update();
-  scenes[0].drawScene();
+  verticalCollision();
+  horizontalCollision();
   charAnimation();
+  updateScene();
+  checkForDeath();
+  showBorders(currentScene);
 }
 
 animate();
-
-console.log(player.onGround);
