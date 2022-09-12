@@ -227,7 +227,7 @@ function verticalCollision() {
   }
 }
 
-let currentScene = 1;
+let currentScene = 2;
 
 function updateScene() {
   if (player.position.x > 1900) {
@@ -272,7 +272,7 @@ const background = [
       x: 0,
       y: 0,
     },
-    imageSrc: "./resources/background C complete.png",
+    imageSrc: "./resources/scene 3.png",
   }),
   //Scene 4 Background
   new Sprite({
@@ -294,11 +294,9 @@ const foregroundObjects = [
     [{ x: 0, y: 745 }, "./resources/frontGrass.png"],
   ]),
   new Scene(3, [
-    [{ x: 1500, y: 340 }, "./resources/small tree.png"],
-    [{ x: 400, y: 770 }, "./resources/small tree.png"],
     [{ x: 1200, y: 540 }, "./resources/small tree 2.png"],
-    [{ x: 200, y: 500 }, "./resources/small tree 2.png"],
-    [{ x: 0, y: 745 }, "./resources/frontGrass.png"],
+    [{ x: 100, y: 417 }, "./resources/small tree 2.png"],
+    [{ x: 150, y: 753 }, "./resources/extragrass.png"],
   ]),
 ];
 
@@ -331,7 +329,7 @@ function updateBorders() {
       borders = [
         // { x: 450, y: 500, width: 200, height: 100 },
         { x: -115, y: 0, width: 50, height: 895 },
-        // { x: -75, y: 750, width: 1950, height: 10 },
+        { x: -75, y: 698, width: 1950, height: 10 },
         { x: 816, y: 525, width: 150, height: 240 },
       ];
       // platformBorders = [{ x: 700, y: 500, width: 200, height: 100 }];
@@ -346,14 +344,14 @@ const sceneObjects = [
     [{ x: 889, y: 770 }, "./resources/towerFiller.png"],
     [{ x: 870, y: 595 }, "./resources/tower.png"],
     [{ x: 600, y: 320 }, "./resources/small tree.png"],
+    [{ x: 630, y: 790 }, "./resources/extragrass.png"],
+    [{ x: 230, y: 790 }, "./resources/extragrass.png"],
+    [{ x: 830, y: 790 }, "./resources/extragrass.png"],
     [{ x: 889, y: 770 }, "./resources/small tree.png"],
   ]),
   new Scene(3, [
-    [{ x: 889, y: 720 }, "./resources/towerFiller.png"],
-    [{ x: 889, y: 770 }, "./resources/towerFiller.png"],
-    [{ x: 870, y: 595 }, "./resources/tower.png"],
-    [{ x: 600, y: 320 }, "./resources/small tree.png"],
-    [{ x: 889, y: 770 }, "./resources/small tree.png"],
+    [{ x: 300, y: 284 }, "./resources/small tree.png"],
+    [{ x: 300, y: 753 }, "./resources/extragrass.png"],
   ]),
 ];
 
@@ -438,7 +436,7 @@ function animate() {
   charAnimation();
   updateScene();
   checkForDeath();
-  showBorders(currentScene);
+  // showBorders(currentScene);
 }
 
 animate();
