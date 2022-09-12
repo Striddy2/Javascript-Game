@@ -227,25 +227,25 @@ function verticalCollision() {
   }
 }
 
-let currentScene = 2;
+let currentScene = 0;
 
 function updateScene() {
   if (player.position.x > 1900) {
     player.position.x = 0;
-    player.position.y = 690;
+    player.position.y = 550;
     currentScene++;
   }
 }
 
 function checkForDeath() {
-  if (player.position.y > 800) {
+  if (player.position.y > 1500) {
     isDead();
   }
 }
 
 function isDead() {
   player.position.x = 0;
-  player.position.y = 680;
+  player.position.y = 550;
 }
 
 // Sets background
@@ -294,9 +294,11 @@ const foregroundObjects = [
     [{ x: 0, y: 745 }, "./resources/frontGrass.png"],
   ]),
   new Scene(3, [
-    [{ x: 1200, y: 540 }, "./resources/small tree 2.png"],
+    [{ x: 1400, y: 417 }, "./resources/small tree 2.png"],
     [{ x: 100, y: 417 }, "./resources/small tree 2.png"],
     [{ x: 150, y: 753 }, "./resources/extragrass.png"],
+    [{ x: 1400, y: 753 }, "./resources/extragrass.png"],
+    [{ x: 1600, y: 753 }, "./resources/extragrass.png"],
   ]),
 ];
 
@@ -327,12 +329,15 @@ function updateBorders() {
       break;
     case 2:
       borders = [
-        // { x: 450, y: 500, width: 200, height: 100 },
         { x: -115, y: 0, width: 50, height: 895 },
-        { x: -75, y: 698, width: 1950, height: 10 },
-        { x: 816, y: 525, width: 150, height: 240 },
+        { x: -75, y: 698, width: 490, height: 140 },
+        { x: 1210, y: 698, width: 700, height: 140 },
       ];
-      // platformBorders = [{ x: 700, y: 500, width: 200, height: 100 }];
+      platformBorders = [
+        { x: 760, y: 442, width: 185, height: 10 },
+        { x: 502, y: 506, width: 125, height: 10 },
+        { x: 1080, y: 522, width: 125, height: 10 },
+      ];
       break;
   }
 }
@@ -370,9 +375,12 @@ function showBorders(currentScene) {
       context.fillRect(891, 595, 150, 240);
       break;
     case 2:
-      context.fillRect(0, 820, 1950, 40);
+      context.fillRect(0, 768, 490, 140);
+      context.fillRect(1285, 768, 700, 140);
       context.fillRect(-40, 0, 50, 895);
-      context.fillRect(891, 595, 150, 240);
+      context.fillRect(835, 512, 185, 10);
+      context.fillRect(577, 576, 125, 10);
+      context.fillRect(1155, 592, 125, 10);
       break;
   }
 }
