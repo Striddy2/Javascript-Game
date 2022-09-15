@@ -237,7 +237,7 @@ function verticalCollision() {
   }
 }
 
-let currentScene = 0;
+let currentScene = 3;
 
 function updateScene() {
   if (player.position.x > 1900) {
@@ -336,6 +336,34 @@ const foregroundObjects = [
 let borders = [];
 let platformBorders = [];
 
+const sceneObjects = [
+  new Scene(1, [[{ x: 370, y: 500 }, "./controls/wasd.png"]]),
+  new Scene(2, [
+    [{ x: 889, y: 720 }, "./resources/towerFiller.png"],
+    [{ x: 889, y: 770 }, "./resources/towerFiller.png"],
+    [{ x: 870, y: 595 }, "./resources/tower.png"],
+    [{ x: 600, y: 320 }, "./resources/small tree.png"],
+    [{ x: 630, y: 790 }, "./resources/extragrass.png"],
+    [{ x: 230, y: 790 }, "./resources/extragrass.png"],
+    [{ x: 830, y: 790 }, "./resources/extragrass.png"],
+    [{ x: 889, y: 770 }, "./resources/small tree.png"],
+  ]),
+  new Scene(3, [
+    [{ x: 300, y: 284 }, "./resources/small tree.png"],
+    [{ x: 300, y: 753 }, "./resources/extragrass.png"],
+  ]),
+  new Scene(4, [
+    [{ x: 300, y: 753 }, "./resources/extragrass.png"],
+    [{ x: 700, y: 553 }, "./resources/small platform.png"],
+    [{ x: 400, y: 323 }, "./resources/platform.png"],
+    [{ x: 325, y: -210 }, "./resources/bigtree.png"],
+  ]),
+  new Scene(5, [
+    [{ x: 300, y: 284 }, "./resources/small tree.png"],
+    [{ x: 300, y: 753 }, "./resources/extragrass.png"],
+  ]),
+];
+
 //border is always x-75 y-70 height +60 compared to the actually drawn object
 function updateBorders() {
   switch (currentScene) {
@@ -374,11 +402,11 @@ function updateBorders() {
       borders = [
         { x: -115, y: 0, width: 50, height: 895 },
         { x: -75, y: 698, width: 490, height: 140 },
-        { x: 1210, y: 698, width: 700, height: 140 },
+        { x: 1575, y: 698, width: 700, height: 140 },
       ];
       platformBorders = [
         { x: 760, y: 442, width: 185, height: 10 },
-        { x: 502, y: 506, width: 125, height: 10 },
+        { x: 625, y: 484, width: 125, height: 10 },
         { x: 1080, y: 522, width: 125, height: 10 },
       ];
       break;
@@ -390,39 +418,12 @@ function updateBorders() {
       ];
       platformBorders = [
         { x: 760, y: 442, width: 185, height: 10 },
-        { x: 502, y: 506, width: 125, height: 10 },
+        { x: 602, y: 506, width: 125, height: 10 },
         { x: 1080, y: 522, width: 125, height: 10 },
       ];
       break;
   }
 }
-
-const sceneObjects = [
-  new Scene(1, [[{ x: 370, y: 500 }, "./controls/wasd.png"]]),
-  new Scene(2, [
-    [{ x: 889, y: 720 }, "./resources/towerFiller.png"],
-    [{ x: 889, y: 770 }, "./resources/towerFiller.png"],
-    [{ x: 870, y: 595 }, "./resources/tower.png"],
-    [{ x: 600, y: 320 }, "./resources/small tree.png"],
-    [{ x: 630, y: 790 }, "./resources/extragrass.png"],
-    [{ x: 230, y: 790 }, "./resources/extragrass.png"],
-    [{ x: 830, y: 790 }, "./resources/extragrass.png"],
-    [{ x: 889, y: 770 }, "./resources/small tree.png"],
-  ]),
-  new Scene(3, [
-    [{ x: 300, y: 284 }, "./resources/small tree.png"],
-    [{ x: 300, y: 753 }, "./resources/extragrass.png"],
-  ]),
-  new Scene(4, [
-    [{ x: 300, y: 753 }, "./resources/extragrass.png"],
-    [{ x: 700, y: 553 }, "./resources/small platform.png"],
-    [{ x: 700, y: 553 }, "./resources/small platform.png"],
-  ]),
-  new Scene(5, [
-    [{ x: 300, y: 284 }, "./resources/small tree.png"],
-    [{ x: 300, y: 753 }, "./resources/extragrass.png"],
-  ]),
-];
 
 context.fillStyle = "blue";
 function showBorders(currentScene) {
@@ -448,10 +449,10 @@ function showBorders(currentScene) {
       break;
     case 3:
       context.fillRect(0, 768, 490, 140);
-      context.fillRect(1285, 768, 700, 140);
+      context.fillRect(1650, 768, 700, 140);
       context.fillRect(-40, 0, 50, 895);
       context.fillRect(835, 512, 185, 10);
-      context.fillRect(577, 576, 125, 10);
+      context.fillRect(700, 554, 125, 10);
       context.fillRect(1155, 592, 125, 10);
       break;
   }
