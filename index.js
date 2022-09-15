@@ -280,7 +280,15 @@ const background = [
       x: 0,
       y: 0,
     },
-    imageSrc: "./resources/background C complete.png",
+    imageSrc: "./resources/scene 4.png",
+  }),
+  //Scene 5 Background
+  new Sprite({
+    position: {
+      x: 0,
+      y: 0,
+    },
+    imageSrc: "./resources/scene 4.png",
   }),
 ];
 
@@ -300,6 +308,20 @@ const foregroundObjects = [
     [{ x: 1400, y: 753 }, "./resources/extragrass.png"],
     [{ x: 1600, y: 753 }, "./resources/extragrass.png"],
   ]),
+  new Scene(4, [
+    [{ x: 1400, y: 417 }, "./resources/small tree 2.png"],
+    [{ x: 100, y: 417 }, "./resources/small tree 2.png"],
+    [{ x: 150, y: 753 }, "./resources/extragrass.png"],
+    [{ x: 1400, y: 753 }, "./resources/extragrass.png"],
+    [{ x: 1600, y: 753 }, "./resources/extragrass.png"],
+  ]),
+  // new Scene(5, [
+  //   [{ x: 1400, y: 417 }, "./resources/small tree 2.png"],
+  //   [{ x: 100, y: 417 }, "./resources/small tree 2.png"],
+  //   [{ x: 150, y: 753 }, "./resources/extragrass.png"],
+  //   [{ x: 1400, y: 753 }, "./resources/extragrass.png"],
+  //   [{ x: 1600, y: 753 }, "./resources/extragrass.png"],
+  // ]),
 ];
 
 let borders = [];
@@ -339,6 +361,30 @@ function updateBorders() {
         { x: 1080, y: 522, width: 125, height: 10 },
       ];
       break;
+    case 3:
+      borders = [
+        { x: -115, y: 0, width: 50, height: 895 },
+        { x: -75, y: 698, width: 490, height: 140 },
+        { x: 1210, y: 698, width: 700, height: 140 },
+      ];
+      platformBorders = [
+        { x: 760, y: 442, width: 185, height: 10 },
+        { x: 502, y: 506, width: 125, height: 10 },
+        { x: 1080, y: 522, width: 125, height: 10 },
+      ];
+      break;
+    case 4:
+      borders = [
+        { x: -115, y: 0, width: 50, height: 895 },
+        { x: -75, y: 698, width: 490, height: 140 },
+        { x: 1210, y: 698, width: 700, height: 140 },
+      ];
+      platformBorders = [
+        { x: 760, y: 442, width: 185, height: 10 },
+        { x: 502, y: 506, width: 125, height: 10 },
+        { x: 1080, y: 522, width: 125, height: 10 },
+      ];
+      break;
   }
 }
 
@@ -355,6 +401,14 @@ const sceneObjects = [
     [{ x: 889, y: 770 }, "./resources/small tree.png"],
   ]),
   new Scene(3, [
+    [{ x: 300, y: 284 }, "./resources/small tree.png"],
+    [{ x: 300, y: 753 }, "./resources/extragrass.png"],
+  ]),
+  new Scene(4, [
+    [{ x: 300, y: 284 }, "./resources/small tree.png"],
+    [{ x: 300, y: 753 }, "./resources/extragrass.png"],
+  ]),
+  new Scene(5, [
     [{ x: 300, y: 284 }, "./resources/small tree.png"],
     [{ x: 300, y: 753 }, "./resources/extragrass.png"],
   ]),
