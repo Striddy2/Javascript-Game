@@ -65,6 +65,16 @@ const player = new Fighter({
   },
 });
 
+const bonefire = new Sprite({
+  position: {
+    x: 170,
+    y: 660,
+  },
+  imageSrc: "./resources/bonfire.png",
+  scale: 2,
+  framesMax: 20,
+});
+
 // Sets Character Animations
 function charAnimation() {
   if (keys.a.pressed && player.lastKey === "a") {
@@ -309,19 +319,18 @@ const foregroundObjects = [
     [{ x: 1600, y: 753 }, "./resources/extragrass.png"],
   ]),
   new Scene(4, [
+    [{ x: 200, y: 417 }, "./resources/small tree 2.png"],
+    [{ x: 250, y: 694 }, "./resources/squarebush.png"],
+    [{ x: 150, y: 753 }, "./resources/extragrass.png"],
+    [{ x: 1700, y: 753 }, "./resources/extragrass.png"],
+  ]),
+  new Scene(5, [
     [{ x: 1400, y: 417 }, "./resources/small tree 2.png"],
     [{ x: 100, y: 417 }, "./resources/small tree 2.png"],
     [{ x: 150, y: 753 }, "./resources/extragrass.png"],
     [{ x: 1400, y: 753 }, "./resources/extragrass.png"],
     [{ x: 1600, y: 753 }, "./resources/extragrass.png"],
   ]),
-  // new Scene(5, [
-  //   [{ x: 1400, y: 417 }, "./resources/small tree 2.png"],
-  //   [{ x: 100, y: 417 }, "./resources/small tree 2.png"],
-  //   [{ x: 150, y: 753 }, "./resources/extragrass.png"],
-  //   [{ x: 1400, y: 753 }, "./resources/extragrass.png"],
-  //   [{ x: 1600, y: 753 }, "./resources/extragrass.png"],
-  // ]),
 ];
 
 let borders = [];
@@ -405,8 +414,9 @@ const sceneObjects = [
     [{ x: 300, y: 753 }, "./resources/extragrass.png"],
   ]),
   new Scene(4, [
-    [{ x: 300, y: 284 }, "./resources/small tree.png"],
     [{ x: 300, y: 753 }, "./resources/extragrass.png"],
+    [{ x: 700, y: 553 }, "./resources/small platform.png"],
+    [{ x: 700, y: 553 }, "./resources/small platform.png"],
   ]),
   new Scene(5, [
     [{ x: 300, y: 284 }, "./resources/small tree.png"],
@@ -429,6 +439,14 @@ function showBorders(currentScene) {
       context.fillRect(891, 595, 150, 240);
       break;
     case 2:
+      context.fillRect(0, 768, 490, 140);
+      context.fillRect(1285, 768, 700, 140);
+      context.fillRect(-40, 0, 50, 895);
+      context.fillRect(835, 512, 185, 10);
+      context.fillRect(577, 576, 125, 10);
+      context.fillRect(1155, 592, 125, 10);
+      break;
+    case 3:
       context.fillRect(0, 768, 490, 140);
       context.fillRect(1285, 768, 700, 140);
       context.fillRect(-40, 0, 50, 895);
@@ -486,6 +504,9 @@ function animate() {
   updateBorders();
   background[currentScene].update();
   // createScene(currentScene);
+  if (currentScene == 0) {
+    bonefire.update();
+  }
   sceneObjects[currentScene].drawScene();
   //animatedObjects[0].update();
   player.update();
@@ -498,7 +519,7 @@ function animate() {
   charAnimation();
   updateScene();
   checkForDeath();
-  // showBorders(currentScene);
+  showBorders(currentScene);
 }
 
 animate();
