@@ -237,7 +237,7 @@ function verticalCollision() {
   }
 }
 
-let currentScene = 3;
+let currentScene = 0;
 
 function updateScene() {
   if (player.position.x > 1900) {
@@ -373,9 +373,6 @@ function updateBorders() {
         { x: -115, y: 0, width: 50, height: 895 },
         { x: -75, y: 750, width: 1950, height: 10 },
       ];
-      platformBorders = [
-        /*{ x: 700, y: 500, width: 200, height: 100 }*/
-      ];
       break;
     case 1:
       borders = [
@@ -474,31 +471,6 @@ function showBorders(currentScene) {
 //     [{ x: 50, y: 300 }, "./resources/platform.png"],
 //   ]),
 // ];
-
-// function createScene(currentScene) {
-//   switch (currentScene) {
-//     case 0:
-//       instructions[currentScene].drawScene();
-//       break;
-//     case 1:
-//       towerPlatforms[currentScene].drawScene();
-//       towerFiller[currentScene].drawScene();
-//       break;
-//   }
-// }
-
-// function createForegroundScene(currentScene) {
-//   switch (currentScene) {
-//     case 0:
-//       grass[currentScene].drawScene();
-//       break;
-//     case 1:
-//       smallTree[currentScene].drawScene();
-//       smallTree2[currentScene].drawScene();
-//       grass[currentScene].drawScene();
-//       break;
-//   }
-// }
 
 function animate() {
   window.requestAnimationFrame(animate);
