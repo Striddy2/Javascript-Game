@@ -5,6 +5,7 @@ class Sprite {
     scale = 1,
     framesMax = 1,
     offset = { x: 0, y: 0 },
+    opacity = 100,
   }) {
     this.position = position;
     this.width = 50;
@@ -17,6 +18,7 @@ class Sprite {
     this.framesElapsed = 0;
     this.framesHold = 10;
     this.offset = offset;
+    this.opacity = opacity;
   }
 
   draw() {

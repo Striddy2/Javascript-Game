@@ -237,6 +237,16 @@ function verticalCollision() {
   }
 }
 
+const transistion = new Sprite({
+    position: {
+      x: 0,
+      y: 0,
+    },
+    scale: 0,
+    imageSrc: "./resources/black screen.jpg",
+  })
+
+
 let currentScene = 0;
 
 function updateScene() {
@@ -244,6 +254,37 @@ function updateScene() {
     player.position.x = 0;
     player.position.y = 550;
     currentScene++;
+    transistion.scale = 1;
+      setTimeout(function(){
+        transistion.scale = 0.9
+    }, 30);
+      setTimeout(function(){
+        transistion.scale = 0.8
+    }, 60);
+      setTimeout(function(){
+        transistion.scale = 0.7
+    }, 90);
+      setTimeout(function(){
+        transistion.scale = 0.6
+      }, 120);
+      setTimeout(function(){
+        transistion.scale = 0.5
+      }, 150);
+      setTimeout(function(){
+        transistion.scale = 0.4
+      }, 180);
+      setTimeout(function(){
+        transistion.scale = 0.3
+      }, 210);
+      setTimeout(function(){
+        transistion.scale = 0.2
+      }, 240);
+      setTimeout(function(){
+        transistion.scale = 0.1
+      }, 270);
+      setTimeout(function(){
+        transistion.scale = 0
+      }, 300);
   }
 }
 
@@ -493,6 +534,7 @@ function animate() {
   updateScene();
   checkForDeath();
   showBorders(currentScene);
+  transistion.update();
 }
 
 animate();
