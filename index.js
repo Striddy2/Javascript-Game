@@ -68,10 +68,10 @@ const player = new Fighter({
 const bonefire = new Sprite({
   position: {
     x: 170,
-    y: 660,
+    y: 660, 
   },
-  imageSrc: "./resources/bonfire.png",
-  scale: 2,
+  imageSrc: "./resources/bonfire3.png",
+  scale: 2, 
   framesMax: 20,
 });
 
@@ -497,23 +497,6 @@ function showBorders(currentScene) {
       break;
   }
 }
-
-//TO BE IMPLEMENTED!!!!!!!!!!!!
-// const animatedObjects = [
-//   new Fighter(
-//     {
-//       imageSrc: "resources/120x80_PNGSheets/_Idle.png",
-//       framesMax: 10,
-//     }
-//     [{ x: 100, y: 0 }, "./resources/platform.png"],
-//     [{ x: 450, y: 350 }, "./resources/platform.png"],
-//   ),
-//   new Sprite(2, [
-//     [{ x: 250, y: 100 }, "./resources/platform.png"],
-//     [{ x: 150, y: 200 }, "./resources/platform.png"],
-//     [{ x: 50, y: 300 }, "./resources/platform.png"],
-//   ]),
-// ];
 
 function animate() {
   window.requestAnimationFrame(animate);
