@@ -35,31 +35,31 @@ const player = new Fighter({
       framesMax: 10,
     },
     idleLeft: {
-      imageSrc: "./resources/_IdleLeft.png",
+      imageSrc: "./resources/IdleLeft.png",
       framesMax: 10,
     },
     run: {
-      imageSrc: "./resources/_Run.png",
+      imageSrc: "./resources/Run.png",
       framesMax: 10,
     },
     runLeft: {
-      imageSrc: "./resources/_RunLeft.png",
+      imageSrc: "./resources/RunLeft.png",
       framesMax: 10,
     },
     jump: {
-      imageSrc: "./resources/_Jump.png",
+      imageSrc: "./resources/Jump.png",
       framesMax: 3,
     },
     jumpLeft: {
-      imageSrc: "./resources/_JumpLeft.png",
+      imageSrc: "./resources/JumpLeft.png",
       framesMax: 3,
     },
     fall: {
-      imageSrc: "./resources/_Fall.png",
+      imageSrc: "./resources/Fall.png",
       framesMax: 3,
     },
     fallLeft: {
-      imageSrc: "./resources/_FallLeft.png",
+      imageSrc: "./resources/FallLeft.png",
       framesMax: 3,
     },
   },
