@@ -35,31 +35,31 @@ const player = new Fighter({
       framesMax: 10,
     },
     idleLeft: {
-      imageSrc: "resources/120x80_PNGSheets/_IdleLeft.png",
+      imageSrc: "./resources/120x80_PNGSheets/_IdleLeft.png",
       framesMax: 10,
     },
     run: {
-      imageSrc: "resources/120x80_PNGSheets/_Run.png",
+      imageSrc: "./resources/120x80_PNGSheets/_Run.png",
       framesMax: 10,
     },
     runLeft: {
-      imageSrc: "resources/120x80_PNGSheets/_RunLeft.png",
+      imageSrc: "./resources/120x80_PNGSheets/_RunLeft.png",
       framesMax: 10,
     },
     jump: {
-      imageSrc: "resources/120x80_PNGSheets/_Jump.png",
+      imageSrc: "./resources/120x80_PNGSheets/_Jump.png",
       framesMax: 3,
     },
     jumpLeft: {
-      imageSrc: "resources/120x80_PNGSheets/_JumpLeft.png",
+      imageSrc: "./resources/120x80_PNGSheets/_JumpLeft.png",
       framesMax: 3,
     },
     fall: {
-      imageSrc: "resources/120x80_PNGSheets/_Fall.png",
+      imageSrc: "./resources/120x80_PNGSheets/_Fall.png",
       framesMax: 3,
     },
     fallLeft: {
-      imageSrc: "resources/120x80_PNGSheets/_FallLeft.png",
+      imageSrc: "./resources/120x80_PNGSheets/_FallLeft.png",
       framesMax: 3,
     },
   },
