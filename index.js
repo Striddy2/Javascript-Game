@@ -22,7 +22,7 @@ const player = new Fighter({
     x: 0,
     y: 10,
   },
-  imageSrc: "resources/120x80_PNGSheets/_Idle.png",
+  imageSrc: "resources/_Idle.png",
   framesMax: 10,
   scale: 3,
   offset: {
@@ -31,7 +31,7 @@ const player = new Fighter({
   },
   sprites: {
     idle: {
-      imageSrc: "resources/120x80_PNGSheets/_Idle.png",
+      imageSrc: "resources/_Idle.png",
       framesMax: 10,
     },
     idleLeft: {
