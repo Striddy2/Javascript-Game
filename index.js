@@ -70,7 +70,7 @@ const bonefire = new Sprite({
     x: 170,
     y: 660,
   },
-  imageSrc: "./resources/bonfire.png",
+  imageSrc: "./resources/120x80_PNGSheets/_Run.png",
   scale: 2,
   framesMax: 20,
 });
