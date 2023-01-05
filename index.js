@@ -396,6 +396,7 @@ const sceneObjects = [
   new Scene(4, [
     [{ x: 300, y: 753 }, "./resources/extragrass.png"],
     [{ x: 700, y: 553 }, "./resources/small platform.png"],
+    [{ x: 923, y: 190 }, "./resources/small platform.png"],
     [{ x: 400, y: 323 }, "./resources/platform.png"],
     [{ x: 325, y: -210 }, "./resources/bigtree.png"],
   ]),
@@ -436,6 +437,7 @@ function updateBorders() {
         { x: 1080, y: 522, width: 125, height: 10 },
       ];
       break;
+      //border is always x-75 y-70 height +60 compared to the actually drawn object
     case 3:
       borders = [
         { x: -115, y: 0, width: 50, height: 895 },
@@ -443,9 +445,9 @@ function updateBorders() {
         { x: 1575, y: 698, width: 700, height: 140 },
       ];
       platformBorders = [
-        { x: 760, y: 442, width: 185, height: 10 },
+        { x: 328, y: 255, width: 185, height: 10 },
         { x: 625, y: 484, width: 125, height: 10 },
-        { x: 1080, y: 522, width: 125, height: 10 },
+        { x: 850, y: 122, width: 125, height: 10 },
       ];
       break;
     case 4:
@@ -489,9 +491,9 @@ function showBorders(currentScene) {
       context.fillRect(0, 768, 490, 140);
       context.fillRect(1650, 768, 700, 140);
       context.fillRect(-40, 0, 50, 895);
-      context.fillRect(835, 512, 185, 10);
+      context.fillRect(403, 325, 185, 10);
       context.fillRect(700, 554, 125, 10);
-      context.fillRect(1155, 592, 125, 10);
+      context.fillRect(925, 192, 125, 10);
       break;
   }
 }
@@ -533,7 +535,7 @@ function animate() {
   charAnimation();
   updateScene();
   checkForDeath();
-  showBorders(currentScene);
+  // showBorders(currentScene);
   transistion.update();
 }
 
